@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { sendMessageToGemini } from '../../services/gemini';
@@ -48,10 +49,11 @@ const FloatingChat = () => {
       {/* Botão flutuante */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 z-50 bg-purple-600 text-white p-4 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 animate-bounce"
+        className="fixed bottom-4 right-4 z-50 bg-purple-600 text-white p-4 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 animate-bounce md:p-4 sm:p-3"
+        aria-label="Abrir chat"
       >
         <svg
-          className="w-6 h-6"
+          className="w-6 h-6 md:w-6 md:h-6 sm:w-5 sm:h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -72,7 +74,7 @@ const FloatingChat = () => {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
-            className="fixed bottom-20 right-4 z-50 w-96 h-[500px] bg-dark-light rounded-lg shadow-2xl flex flex-col overflow-hidden glass"
+            className="fixed bottom-0 right-0 z-50 w-full md:w-96 h-[100vh] md:h-[500px] md:bottom-20 md:right-4 bg-dark-light rounded-none md:rounded-lg shadow-2xl flex flex-col overflow-hidden glass"
           >
             {/* Header do chat */}
             <div className="p-4 bg-purple-600 text-white flex justify-between items-center">
@@ -87,10 +89,11 @@ const FloatingChat = () => {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-white hover:text-gray-200"
+                className="text-white hover:text-gray-200 p-2 rounded-full bg-purple-700/50 hover:bg-purple-700/70 transition-all"
+                aria-label="Fechar chat"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -113,7 +116,7 @@ const FloatingChat = () => {
                   className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-lg ${
+                    className={`max-w-[85%] p-3 rounded-lg ${
                       message.isUser
                         ? 'bg-purple-600 text-white'
                         : 'bg-gray-700 text-white'
@@ -145,6 +148,7 @@ const FloatingChat = () => {
                 <button
                   type="submit"
                   className="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition-colors"
+                  aria-label="Enviar mensagem"
                 >
                   <svg
                     className="w-5 h-5"

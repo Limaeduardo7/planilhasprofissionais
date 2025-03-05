@@ -327,7 +327,7 @@ export default function Home() {
                 <ImageSlider
                   images={[
                     'https://i.imgur.com/Yv666Ei.png',
-                    'https://i.imgur.com/Yv666Ei.png'
+                    'https://i.imgur.com/tzlBetP.png'
                   ]}
                   title="Planilhas Complementares"
                 />

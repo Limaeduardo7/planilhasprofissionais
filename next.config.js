@@ -2,9 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    appDir: true,
-  },
+  images: {
+    domains: ['i.imgur.com'],
+    unoptimized: true,
+  }
 }
 
 module.exports = nextConfig 

@@ -69,8 +69,8 @@ const Hero = () => {
           <div className="vimeo-container glass rgb-border rgb-glow">
             <iframe
               title="Vídeo de apresentação do Kit Fluxo de Caixa 4.0"
-              src="https://player.vimeo.com/video/830395583?autoplay=1&loop=1&title=0&byline=0&portrait=0"
-              allow="autoplay; fullscreen; picture-in-picture"
+              src="https://player.vimeo.com/video/830395583?loop=1&title=0&byline=0&portrait=0"
+              allow="fullscreen; picture-in-picture"
               allowFullScreen
               style={{ border: 'none' }}
               loading="lazy"
