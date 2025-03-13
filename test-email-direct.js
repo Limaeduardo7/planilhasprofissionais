@@ -6,9 +6,9 @@ const resend = new Resend('re_iRKH28RL_Mih9VuSaY7vdBV9FXkVhUSN3');
 
 // Links dos produtos
 const PRODUCT_LINKS = {
-  'fluxo-de-caixa-4-0': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
-  'controle-estoque': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
-  'controle-financeiro': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd'
+  'fluxo-de-caixa-4-0': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'controle-estoque': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'controle-financeiro': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link'
 };
 
 // Função para enviar e-mail para um produto específico

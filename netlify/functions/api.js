@@ -3,21 +3,24 @@ const { Resend } = require('resend');
 // Inicializar o cliente Resend com a chave API
 const resend = new Resend(process.env.RESEND_API_KEY || 're_iRKH28RL_Mih9VuSaY7vdBV9FXkVhUSN3');
 
+// ID do webhook da Kiwify
+const KIWIFY_WEBHOOK_ID = 'ryijg7wxh18';
+
 // Links dos produtos
 const PRODUCT_LINKS = {
   // ID do produto na Kiwify: Link do Google Drive
   // Fluxo de Caixa
-  'fluxo-de-caixa-4-0': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
-  'fluxo-de-caixa': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
-  'fluxo-caixa': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
+  'fluxo-de-caixa-4-0': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'fluxo-de-caixa': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'fluxo-caixa': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
   
   // Controle de Estoque
-  'controle-estoque': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
-  'estoque': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
+  'controle-estoque': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'estoque': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
   
   // Controle Financeiro
-  'controle-financeiro': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
-  'financeiro': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
+  'controle-financeiro': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'financeiro': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
   
   // Adicione mais produtos aqui conforme necessário
 };
@@ -66,14 +69,14 @@ function identifyProduct(productId, productName) {
   
   // Retornar link padrão se nenhuma correspondência for encontrada
   return {
-    link: 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
+    link: 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
     name: productName
   };
 }
 
 exports.handler = async (event, context) => {
   // Verificar se é uma solicitação de webhook da Kiwify
-  if (event.path.includes('/api/webhook/kiwify')) {
+  if (event.path.includes('/api/webhook/kiwify') || event.path.includes(`/${KIWIFY_WEBHOOK_ID}`)) {
     try {
       // Analisar o corpo da solicitação
       const payload = JSON.parse(event.body);

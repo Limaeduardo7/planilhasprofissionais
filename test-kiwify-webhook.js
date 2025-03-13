@@ -1,9 +1,12 @@
 // Script para testar o webhook da Kiwify com diferentes produtos
 const axios = require('axios');
 
+// ID do webhook da Kiwify
+const KIWIFY_WEBHOOK_ID = 'ryijg7wxh18';
+
 // URL do webhook (local ou produção)
-const webhookUrl = 'https://planilhasprofissionais.com/.netlify/functions/api/webhook/kiwify';
-// const webhookUrl = 'http://localhost:8888/.netlify/functions/api/webhook/kiwify'; // Para teste local
+const webhookUrl = `https://planilhasprofissionais.com/.netlify/functions/api/${KIWIFY_WEBHOOK_ID}`;
+// const webhookUrl = `http://localhost:8888/.netlify/functions/api/${KIWIFY_WEBHOOK_ID}`; // Para teste local
 
 // Função para simular um evento de compra aprovada da Kiwify
 async function simulateKiwifyApprovedOrder(productId, productName, customerEmail, customerName) {
