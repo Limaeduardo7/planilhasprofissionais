@@ -3,6 +3,14 @@ const { Resend } = require('resend');
 // Inicializar o cliente Resend com a chave API
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Links dos produtos
+const PRODUCT_LINKS = {
+  // ID do produto na Kiwify: Link do Google Drive
+  'fluxo-de-caixa-4-0': 'https://drive.google.com/file/d/1Ck-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa/view?usp=sharing',
+  'controle-estoque': 'https://drive.google.com/file/d/2Ck-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa/view?usp=sharing',
+  'controle-financeiro': 'https://drive.google.com/file/d/3Ck-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa/view?usp=sharing'
+};
+
 exports.handler = async (event, context) => {
   // Verificar se é uma solicitação de webhook da Kiwify
   if (event.path.includes('/api/webhook/kiwify')) {
@@ -13,19 +21,25 @@ exports.handler = async (event, context) => {
       // Verificar se é uma notificação de pedido aprovado
       if (payload.event === 'order.approved') {
         // Extrair informações do cliente e do produto
-        const { customer, product } = payload;
+        const { customer, product } = payload.data;
         
         // Determinar qual produto foi comprado e obter o link correspondente
         let productLink = '';
         let productName = product.name;
+        let productId = product.id.toLowerCase();
         
-        // Lógica para determinar qual link de produto enviar
-        if (product.id === process.env.KIWIFY_PRODUCT_ID_FLUXO_CAIXA) {
+        // Obter o link do produto com base no ID
+        if (PRODUCT_LINKS[productId]) {
+          productLink = PRODUCT_LINKS[productId];
+        } else if (process.env.PRODUCT_LINK_FLUXO_CAIXA && productId.includes('fluxo')) {
           productLink = process.env.PRODUCT_LINK_FLUXO_CAIXA;
-        } else if (product.id === process.env.KIWIFY_PRODUCT_ID_CONTROLE_ESTOQUE) {
+        } else if (process.env.PRODUCT_LINK_CONTROLE_ESTOQUE && productId.includes('estoque')) {
           productLink = process.env.PRODUCT_LINK_CONTROLE_ESTOQUE;
-        } else if (product.id === process.env.KIWIFY_PRODUCT_ID_CONTROLE_FINANCEIRO) {
+        } else if (process.env.PRODUCT_LINK_CONTROLE_FINANCEIRO && productId.includes('financeiro')) {
           productLink = process.env.PRODUCT_LINK_CONTROLE_FINANCEIRO;
+        } else {
+          // Link padrão caso não encontre correspondência
+          productLink = 'https://planilhasprofissionais.com/contato';
         }
         
         // Enviar e-mail de confirmação com o link do produto
