@@ -1,15 +1,19 @@
 // Script para testar o webhook da Kiwify com diferentes produtos
 const axios = require('axios');
 
-// ID do webhook da Kiwify
-const KIWIFY_WEBHOOK_ID = 'ryijg7wxh18';
+// IDs dos webhooks da Kiwify
+const KIWIFY_WEBHOOK_IDS = {
+  PRODUTO1: 'ryijg7wxh18',
+  PRODUTO2: '2bz6rhm4v6l'
+};
 
 // URL do webhook (local ou produção)
-const webhookUrl = `https://planilhasprofissionais.com/.netlify/functions/api/${KIWIFY_WEBHOOK_ID}`;
-// const webhookUrl = `http://localhost:8888/.netlify/functions/api/${KIWIFY_WEBHOOK_ID}`; // Para teste local
+const webhookUrl1 = `https://planilhasprofissionais.com/.netlify/functions/api/${KIWIFY_WEBHOOK_IDS.PRODUTO1}`;
+const webhookUrl2 = `https://planilhasprofissionais.com/.netlify/functions/api/${KIWIFY_WEBHOOK_IDS.PRODUTO2}`;
+// const webhookUrlLocal = `http://localhost:8888/.netlify/functions/api/${KIWIFY_WEBHOOK_IDS.PRODUTO1}`; // Para teste local
 
 // Função para simular um evento de compra aprovada da Kiwify
-async function simulateKiwifyApprovedOrder(productId, productName, customerEmail, customerName) {
+async function simulateKiwifyApprovedOrder(webhookUrl, productId, productName, customerEmail, customerName) {
   const payload = {
     event: 'order.approved',
     data: {
@@ -25,7 +29,7 @@ async function simulateKiwifyApprovedOrder(productId, productName, customerEmail
   };
 
   try {
-    console.log(`Enviando evento para ${productName} (ID: ${productId})...`);
+    console.log(`Enviando evento para ${productName} (ID: ${productId}) via ${webhookUrl}...`);
     const response = await axios.post(webhookUrl, payload);
     console.log('Resposta:', response.data);
     console.log('Status:', response.status);
@@ -39,11 +43,12 @@ async function simulateKiwifyApprovedOrder(productId, productName, customerEmail
   }
 }
 
-// Testar com diferentes produtos
+// Testar com diferentes produtos e webhooks
 async function runTests() {
   try {
-    // Teste para Fluxo de Caixa
+    // Teste para Fluxo de Caixa via primeiro webhook
     await simulateKiwifyApprovedOrder(
+      webhookUrl1,
       'fluxo-de-caixa-4-0',
       'Fluxo de Caixa 4.0',
       'nasklima@gmail.com', // Use o e-mail verificado no Resend
@@ -53,8 +58,9 @@ async function runTests() {
     // Aguardar um pouco entre as requisições
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Teste para Controle de Estoque
+    // Teste para Controle de Estoque via segundo webhook
     await simulateKiwifyApprovedOrder(
+      webhookUrl2,
       'controle-estoque',
       'Controle de Estoque Profissional',
       'nasklima@gmail.com', // Use o e-mail verificado no Resend
@@ -64,8 +70,9 @@ async function runTests() {
     // Aguardar um pouco entre as requisições
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Teste para Controle Financeiro
+    // Teste para Controle Financeiro via primeiro webhook
     await simulateKiwifyApprovedOrder(
+      webhookUrl1,
       'controle-financeiro',
       'Controle Financeiro Completo',
       'nasklima@gmail.com', // Use o e-mail verificado no Resend

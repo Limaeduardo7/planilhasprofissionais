@@ -3,8 +3,11 @@ const { Resend } = require('resend');
 // Inicializar o cliente Resend com a chave API
 const resend = new Resend(process.env.RESEND_API_KEY || 're_iRKH28RL_Mih9VuSaY7vdBV9FXkVhUSN3');
 
-// ID do webhook da Kiwify
-const KIWIFY_WEBHOOK_ID = 'ryijg7wxh18';
+// IDs dos webhooks da Kiwify
+const KIWIFY_WEBHOOK_IDS = [
+  'ryijg7wxh18',
+  '2bz6rhm4v6l'
+];
 
 // Links dos produtos
 const PRODUCT_LINKS = {
@@ -76,7 +79,8 @@ function identifyProduct(productId, productName) {
 
 exports.handler = async (event, context) => {
   // Verificar se é uma solicitação de webhook da Kiwify
-  if (event.path.includes('/api/webhook/kiwify') || event.path.includes(`/${KIWIFY_WEBHOOK_ID}`)) {
+  if (event.path.includes('/api/webhook/kiwify') || 
+      KIWIFY_WEBHOOK_IDS.some(id => event.path.includes(`/${id}`))) {
     try {
       // Analisar o corpo da solicitação
       const payload = JSON.parse(event.body);
