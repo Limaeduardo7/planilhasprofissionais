@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'export',
   images: {
     domains: ['i.imgur.com'],
     unoptimized: true,
@@ -12,4 +11,4 @@ const nextConfig = {
   // basePath: '/planilhasprofissionais',
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig; 
