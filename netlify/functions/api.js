@@ -6,9 +6,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // Links dos produtos
 const PRODUCT_LINKS = {
   // ID do produto na Kiwify: Link do Google Drive
-  'fluxo-de-caixa-4-0': 'https://drive.google.com/file/d/1Ck-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa/view?usp=sharing',
-  'controle-estoque': 'https://drive.google.com/file/d/2Ck-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa/view?usp=sharing',
-  'controle-financeiro': 'https://drive.google.com/file/d/3Ck-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa-Oa/view?usp=sharing'
+  'fluxo-de-caixa-4-0': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
+  'controle-estoque': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd',
+  'controle-financeiro': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd'
 };
 
 exports.handler = async (event, context) => {
@@ -38,8 +38,8 @@ exports.handler = async (event, context) => {
         } else if (process.env.PRODUCT_LINK_CONTROLE_FINANCEIRO && productId.includes('financeiro')) {
           productLink = process.env.PRODUCT_LINK_CONTROLE_FINANCEIRO;
         } else {
-          // Link padrão caso não encontre correspondência
-          productLink = 'https://planilhasprofissionais.com/contato';
+          // Link padrão para todos os produtos
+          productLink = 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd';
         }
         
         // Enviar e-mail de confirmação com o link do produto
