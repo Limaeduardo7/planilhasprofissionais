@@ -5,11 +5,11 @@ const axios = require('axios');
 const WEBHOOK_PRODUCT_MAPPING = {
   'ryijg7wxh18': {
     link: 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
-    defaultName: 'Fluxo de Caixa 4.0'
+    defaultName: 'Planilha de Orçamento Familiar'
   },
   '2bz6rhm4v6l': {
     link: 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
-    defaultName: 'Controle de Estoque'
+    defaultName: 'Kit Fluxo de Caixa 4.0'
   }
 };
 
@@ -17,13 +17,13 @@ const WEBHOOK_PRODUCT_MAPPING = {
 const webhook1 = {
   id: 'ryijg7wxh18',
   url: `https://planilhasprofissionais.com/.netlify/functions/api/ryijg7wxh18`,
-  productName: 'Fluxo de Caixa 4.0'
+  productName: 'Planilha de Orçamento Familiar'
 };
 
 const webhook2 = {
   id: '2bz6rhm4v6l',
   url: `https://planilhasprofissionais.com/.netlify/functions/api/2bz6rhm4v6l`,
-  productName: 'Controle de Estoque Profissional'
+  productName: 'Kit Fluxo de Caixa 4.0'
 };
 
 // Função para simular um evento de compra aprovada da Kiwify

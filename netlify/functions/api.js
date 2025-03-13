@@ -7,11 +7,11 @@ const resend = new Resend(process.env.RESEND_API_KEY || 're_iRKH28RL_Mih9VuSaY7v
 const WEBHOOK_PRODUCT_MAPPING = {
   'ryijg7wxh18': {
     link: 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
-    defaultName: 'Fluxo de Caixa 4.0'
+    defaultName: 'Planilha de Orçamento Familiar'
   },
   '2bz6rhm4v6l': {
     link: 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
-    defaultName: 'Controle de Estoque'
+    defaultName: 'Kit Fluxo de Caixa 4.0'
   }
 };
 
