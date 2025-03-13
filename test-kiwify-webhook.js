@@ -1,19 +1,33 @@
 // Script para testar o webhook da Kiwify com diferentes produtos
 const axios = require('axios');
 
-// IDs dos webhooks da Kiwify
-const KIWIFY_WEBHOOK_IDS = {
-  PRODUTO1: 'ryijg7wxh18',
-  PRODUTO2: '2bz6rhm4v6l'
+// Mapeamento de webhooks para produtos
+const WEBHOOK_PRODUCT_MAPPING = {
+  'ryijg7wxh18': {
+    link: 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+    defaultName: 'Fluxo de Caixa 4.0'
+  },
+  '2bz6rhm4v6l': {
+    link: 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
+    defaultName: 'Controle de Estoque'
+  }
 };
 
-// URL do webhook (local ou produção)
-const webhookUrl1 = `https://planilhasprofissionais.com/.netlify/functions/api/${KIWIFY_WEBHOOK_IDS.PRODUTO1}`;
-const webhookUrl2 = `https://planilhasprofissionais.com/.netlify/functions/api/${KIWIFY_WEBHOOK_IDS.PRODUTO2}`;
-// const webhookUrlLocal = `http://localhost:8888/.netlify/functions/api/${KIWIFY_WEBHOOK_IDS.PRODUTO1}`; // Para teste local
+// URLs dos webhooks (produção)
+const webhook1 = {
+  id: 'ryijg7wxh18',
+  url: `https://planilhasprofissionais.com/.netlify/functions/api/ryijg7wxh18`,
+  productName: 'Fluxo de Caixa 4.0'
+};
+
+const webhook2 = {
+  id: '2bz6rhm4v6l',
+  url: `https://planilhasprofissionais.com/.netlify/functions/api/2bz6rhm4v6l`,
+  productName: 'Controle de Estoque Profissional'
+};
 
 // Função para simular um evento de compra aprovada da Kiwify
-async function simulateKiwifyApprovedOrder(webhookUrl, productId, productName, customerEmail, customerName) {
+async function simulateKiwifyApprovedOrder(webhook, customerEmail, customerName) {
   const payload = {
     event: 'order.approved',
     data: {
@@ -22,15 +36,18 @@ async function simulateKiwifyApprovedOrder(webhookUrl, productId, productName, c
         email: customerEmail
       },
       product: {
-        id: productId,
-        name: productName
+        id: `produto-teste-${webhook.id}`,
+        name: webhook.productName
       }
     }
   };
 
   try {
-    console.log(`Enviando evento para ${productName} (ID: ${productId}) via ${webhookUrl}...`);
-    const response = await axios.post(webhookUrl, payload);
+    console.log(`Enviando evento para ${webhook.productName} via webhook ${webhook.id}...`);
+    console.log(`Webhook URL: ${webhook.url}`);
+    console.log(`Link esperado: ${WEBHOOK_PRODUCT_MAPPING[webhook.id].link}`);
+    
+    const response = await axios.post(webhook.url, payload);
     console.log('Resposta:', response.data);
     console.log('Status:', response.status);
     return response.data;
@@ -43,43 +60,23 @@ async function simulateKiwifyApprovedOrder(webhookUrl, productId, productName, c
   }
 }
 
-// Testar com diferentes produtos e webhooks
+// Testar com diferentes webhooks
 async function runTests() {
   try {
-    // Teste para Fluxo de Caixa via primeiro webhook
-    await simulateKiwifyApprovedOrder(
-      webhookUrl1,
-      'fluxo-de-caixa-4-0',
-      'Fluxo de Caixa 4.0',
-      'nasklima@gmail.com', // Use o e-mail verificado no Resend
-      'Eduardo Lima'
-    );
+    const testEmail = 'nasklima@gmail.com'; // Use o e-mail verificado no Resend
+    const testName = 'Eduardo Lima';
+    
+    console.log('=== TESTE 1: Webhook para Fluxo de Caixa ===');
+    await simulateKiwifyApprovedOrder(webhook1, testEmail, testName);
 
     // Aguardar um pouco entre as requisições
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Teste para Controle de Estoque via segundo webhook
-    await simulateKiwifyApprovedOrder(
-      webhookUrl2,
-      'controle-estoque',
-      'Controle de Estoque Profissional',
-      'nasklima@gmail.com', // Use o e-mail verificado no Resend
-      'Eduardo Lima'
-    );
-
-    // Aguardar um pouco entre as requisições
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Teste para Controle Financeiro via primeiro webhook
-    await simulateKiwifyApprovedOrder(
-      webhookUrl1,
-      'controle-financeiro',
-      'Controle Financeiro Completo',
-      'nasklima@gmail.com', // Use o e-mail verificado no Resend
-      'Eduardo Lima'
-    );
-
-    console.log('Todos os testes foram concluídos com sucesso!');
+    console.log('\n=== TESTE 2: Webhook para Controle de Estoque ===');
+    await simulateKiwifyApprovedOrder(webhook2, testEmail, testName);
+    
+    console.log('\nTodos os testes foram concluídos com sucesso!');
+    console.log('Verifique sua caixa de e-mail para confirmar se os links corretos foram enviados.');
   } catch (error) {
     console.error('Erro durante os testes:', error);
   }

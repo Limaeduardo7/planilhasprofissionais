@@ -3,13 +3,22 @@ const { Resend } = require('resend');
 // Inicializar o cliente Resend com a chave API
 const resend = new Resend(process.env.RESEND_API_KEY || 're_iRKH28RL_Mih9VuSaY7vdBV9FXkVhUSN3');
 
-// IDs dos webhooks da Kiwify
-const KIWIFY_WEBHOOK_IDS = [
-  'ryijg7wxh18',
-  '2bz6rhm4v6l'
-];
+// Mapeamento de webhooks para produtos
+const WEBHOOK_PRODUCT_MAPPING = {
+  'ryijg7wxh18': {
+    link: 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+    defaultName: 'Fluxo de Caixa 4.0'
+  },
+  '2bz6rhm4v6l': {
+    link: 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
+    defaultName: 'Controle de Estoque'
+  }
+};
 
-// Links dos produtos
+// Lista de IDs de webhooks para verificação de rotas
+const KIWIFY_WEBHOOK_IDS = Object.keys(WEBHOOK_PRODUCT_MAPPING);
+
+// Links dos produtos (mantido para compatibilidade com outros scripts)
 const PRODUCT_LINKS = {
   // ID do produto na Kiwify: Link do Google Drive
   // Fluxo de Caixa
@@ -18,18 +27,25 @@ const PRODUCT_LINKS = {
   'fluxo-caixa': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
   
   // Controle de Estoque
-  'controle-estoque': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
-  'estoque': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
+  'controle-estoque': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
+  'estoque': 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
   
   // Controle Financeiro
   'controle-financeiro': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
   'financeiro': 'https://drive.google.com/drive/folders/1gWs22ggjAuZTjC4zt6W29jSeXPuMafdE?usp=drive_link',
-  
-  // Adicione mais produtos aqui conforme necessário
 };
 
-// Função para identificar o produto com base no ID ou nome
-function identifyProduct(productId, productName) {
+// Função para identificar o produto com base no webhook e no ID/nome do produto
+function identifyProduct(webhookId, productId, productName) {
+  // Se o webhook estiver mapeado, usar seu link específico
+  if (WEBHOOK_PRODUCT_MAPPING[webhookId]) {
+    return {
+      link: WEBHOOK_PRODUCT_MAPPING[webhookId].link,
+      name: productName || WEBHOOK_PRODUCT_MAPPING[webhookId].defaultName
+    };
+  }
+  
+  // Fallback para a lógica anterior se o webhook não estiver mapeado
   // Normalizar o ID e nome do produto (remover espaços, converter para minúsculas)
   const normalizedId = productId.toLowerCase().trim();
   const normalizedName = productName.toLowerCase().trim();
@@ -79,8 +95,10 @@ function identifyProduct(productId, productName) {
 
 exports.handler = async (event, context) => {
   // Verificar se é uma solicitação de webhook da Kiwify
-  if (event.path.includes('/api/webhook/kiwify') || 
-      KIWIFY_WEBHOOK_IDS.some(id => event.path.includes(`/${id}`))) {
+  const isKiwifyWebhook = event.path.includes('/api/webhook/kiwify') || 
+                          KIWIFY_WEBHOOK_IDS.some(id => event.path.includes(`/${id}`));
+  
+  if (isKiwifyWebhook) {
     try {
       // Analisar o corpo da solicitação
       const payload = JSON.parse(event.body);
@@ -93,8 +111,20 @@ exports.handler = async (event, context) => {
         // Extrair informações do cliente e do produto
         const { customer, product } = payload.data;
         
-        // Identificar o produto e obter o link correspondente
-        const productInfo = identifyProduct(product.id, product.name);
+        // Determinar qual webhook está sendo usado
+        let webhookId = null;
+        for (const id of KIWIFY_WEBHOOK_IDS) {
+          if (event.path.includes(`/${id}`)) {
+            webhookId = id;
+            break;
+          }
+        }
+        
+        // Identificar o produto e obter o link correspondente com base no webhook
+        const productInfo = identifyProduct(webhookId, product.id, product.name);
+        
+        // Registrar informações para depuração
+        console.log(`Webhook ID: ${webhookId}, Produto: ${product.name}, Link: ${productInfo.link}`);
         
         // Enviar e-mail de confirmação com o link do produto
         const { data, error } = await resend.emails.send({
