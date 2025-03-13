@@ -91,7 +91,7 @@ exports.handler = async (event, context) => {
         
         // Enviar e-mail de confirmação com o link do produto
         const { data, error } = await resend.emails.send({
-          from: 'Planilhas Profissionais <contato@planilhasprofissionais.com>',
+          from: 'Planilhas Profissionais <onboarding@resend.dev>',
           to: customer.email,
           subject: `Acesso ao seu produto: ${productInfo.name}`,
           html: `
