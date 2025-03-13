@@ -117,7 +117,7 @@ const Hero = () => {
           </div>
 
           <a 
-            href="https://sun.eduzz.com/1210961" 
+            href="https://pay.kiwify.com.br/HulJzc4" 
             target="_blank"
             rel="noopener noreferrer"
             className="btn-modern text-xl px-10 py-5 inline-flex items-center gap-3 animate-pulse"

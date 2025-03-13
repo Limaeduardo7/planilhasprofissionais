@@ -27,9 +27,9 @@ const ImageSlider = dynamic(() => import('../components/home/ImageSlider'), {
   loading: () => <div>Carregando...</div>
 });
 
-const FloatingChat = dynamic(() => import('../components/chat/FloatingChat'), {
+const FloatingWhatsApp = dynamic(() => import('../components/chat/FloatingWhatsApp'), {
   ssr: false,
-  loading: () => <div>Carregando...</div>
+  loading: () => <div></div>
 });
 
 export default function Home() {
@@ -174,7 +174,7 @@ export default function Home() {
                 className="mt-12"
               >
                 <a 
-                  href="https://sun.eduzz.com/1210961" 
+                  href="https://pay.kiwify.com.br/HulJzc4" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-modern text-lg px-8 py-4 inline-flex items-center gap-2"
@@ -240,7 +240,7 @@ export default function Home() {
                   Não permita que isso aconteça com sua empresa, adquira agora nossas Planilhas Profissionais e tenha um controle financeiro preciso e eficiente, garantindo a estabilidade e o crescimento do seu negócio.
                 </p>
                 <a 
-                  href="https://sun.eduzz.com/1210961" 
+                  href="https://pay.kiwify.com.br/HulJzc4" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-modern inline-flex items-center gap-2 text-lg"
@@ -364,7 +364,7 @@ export default function Home() {
             
             <div className="text-center">
               <a 
-                href="https://sun.eduzz.com/1210961" 
+                href="https://pay.kiwify.com.br/HulJzc4" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-modern text-lg px-8 py-4 inline-flex items-center gap-2"
@@ -464,7 +464,7 @@ export default function Home() {
 
             <div className="text-center mt-12">
               <a 
-                href="https://sun.eduzz.com/1210961" 
+                href="https://pay.kiwify.com.br/HulJzc4" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-modern text-lg px-8 py-4 inline-flex items-center gap-2"
@@ -520,7 +520,7 @@ export default function Home() {
                 Se não estiver satisfeito com as planilhas, entre em contato conosco dentro de 30 dias para obter o reembolso completo.
               </p>
               <a 
-                href="https://sun.eduzz.com/1210961" 
+                href="https://pay.kiwify.com.br/HulJzc4" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-modern text-lg px-8 py-4 inline-flex items-center gap-2"
@@ -544,8 +544,8 @@ export default function Home() {
         </div>
       </section>
 
-        {/* Adiciona o chat flutuante */}
-        <FloatingChat />
+        {/* Adiciona o botão do WhatsApp flutuante */}
+        <FloatingWhatsApp />
       </main>
       <Footer />
     </>
