@@ -2,7 +2,7 @@
 const { Resend } = require('resend');
 
 // Inicializar o cliente Resend com a chave API
-const resend = new Resend('re_Lv2t9jdP_AhAcTxfZz4ebvaNWCCqSns9m');
+const resend = new Resend('re_iRKH28RL_Mih9VuSaY7vdBV9FXkVhUSN3');
 
 // Link do produto para teste - Link correto do Google Drive
 const productLink = 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd';

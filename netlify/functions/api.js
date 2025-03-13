@@ -1,7 +1,7 @@
 const { Resend } = require('resend');
 
 // Inicializar o cliente Resend com a chave API
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_iRKH28RL_Mih9VuSaY7vdBV9FXkVhUSN3');
 
 // Links dos produtos
 const PRODUCT_LINKS = {
