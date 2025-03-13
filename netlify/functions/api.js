@@ -12,6 +12,22 @@ const WEBHOOK_PRODUCT_MAPPING = {
   '2bz6rhm4v6l': {
     link: 'https://drive.google.com/drive/folders/1gMx3OvPmZR-tYurJwjjqINY5Yd8JFQHd?usp=drive_link',
     defaultName: 'Kit Fluxo de Caixa 4.0'
+  },
+  'ia0ai3c2yy3': {
+    link: 'https://drive.google.com/drive/folders/1X77GcF7FWPQbZ6nlWNP4uo2JS9Vdmh9q?usp=drive_link',
+    defaultName: 'Planilha de Precificação de Produtos'
+  },
+  'wab3dr1gwmk': {
+    link: 'https://drive.google.com/drive/folders/13F7t9xLuMNZDKd0exsjbAcm_2SxCYdRb?usp=drive_link',
+    defaultName: 'Planilhas para Recursos Humanos'
+  },
+  'dj818mtxkyj': {
+    link: 'https://drive.google.com/drive/folders/1I58ZtVMerqyiQoxF-4bn5E8ycLFBC0Er?usp=drive_link',
+    defaultName: 'Planilha de Estoque profissional + 5 planilhas bônus'
+  },
+  '0dct00063qt': {
+    link: 'https://drive.google.com/drive/folders/1R-xje3lFc6bNyyAYl2vBWGKD8JStcMz4?usp=drive_link',
+    defaultName: 'Planilha de Balanço Patrimonial'
   }
 };
 
