@@ -108,12 +108,15 @@ async function runTests() {
     
     // Selecione quais webhooks testar (comente ou descomente conforme necessário)
     const webhooksToTest = [
-      { name: 'Planilha de Orçamento Familiar', webhook: webhook1 },
-      { name: 'Kit Fluxo de Caixa 4.0', webhook: webhook2 },
-      { name: 'Planilha de Precificação de Produtos', webhook: webhook3 },
-      { name: 'Planilhas para Recursos Humanos', webhook: webhook4 },
-      { name: 'Planilha de Estoque profissional', webhook: webhook5 },
-      { name: 'Planilha de Balanço Patrimonial', webhook: webhook6 }
+      // Webhooks originais
+      // { name: 'Planilha de Orçamento Familiar', webhook: webhook1 },
+      // { name: 'Kit Fluxo de Caixa 4.0', webhook: webhook2 },
+      
+      // Novos webhooks adicionados
+      // { name: 'Planilha de Precificação de Produtos', webhook: webhook3 },
+      // { name: 'Planilhas para Recursos Humanos', webhook: webhook4 },
+      // { name: 'Planilha de Estoque profissional', webhook: webhook5 },
+      { name: 'Planilha de Balanço Patrimonial', webhook: webhook6 } // Deixe pelo menos um ativo para teste rápido
     ];
     
     for (const [index, test] of webhooksToTest.entries()) {
