@@ -1,19 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+  output: 'export', // Habilita a exportação estática para GitHub Pages
   images: {
-    domains: ['i.imgur.com'],
-    unoptimized: true,
+    unoptimized: true, // Necessário para exportação estática
   },
-  // Adicionar um prefixo de ativos para o GitHub Pages, comentado inicialmente
-  // assetPrefix: '/planilhasprofissionais/',
-  // basePath: '/planilhasprofissionais',
-  output: 'export',
-  // Desabilitar a geração de arquivos de API no build estático
-  experimental: {
-    appDir: false,
-  },
-}
+  // Se o repositório for implantado em um subdiretório do domínio
+  // basePath: '/nome-do-repositorio',
+};
 
 module.exports = nextConfig; 
