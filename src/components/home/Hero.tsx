@@ -89,7 +89,7 @@ const Hero = () => {
             <div className="mb-4">
               <span className="text-2xl md:text-3xl font-bold">
                 <span className="text-gray-400 line-through mr-4" aria-label="Preço original">R$ 497,00</span>
-                <span className="text-green-400" aria-label="Preço com desconto">R$ 147,00</span>
+                <span className="text-green-400" aria-label="Preço com desconto">R$ 47,00</span>
               </span>
               <p className="text-sm text-gray-400 mt-1">Pagamento único - Acesso vitalício</p>
             </div>

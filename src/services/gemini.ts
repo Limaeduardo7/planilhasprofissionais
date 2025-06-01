@@ -13,7 +13,7 @@ export async function sendMessageToGemini(message: string): Promise<string> {
 
     Detalhes do produto que você está vendendo:
     - Kit Fluxo de Caixa 4.0
-    - Preço atual: R$ 147,00 (valor normal R$ 497,00)
+    - Preço atual: R$ 47,00 (valor normal R$ 497,00)
     - Garantia de 30 dias
     - Acesso vitalício
     - Inclui planilhas completas

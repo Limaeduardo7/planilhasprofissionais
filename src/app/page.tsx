@@ -503,7 +503,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-4">
               <p className="text-3xl font-bold text-purple-400">
                 <span className="text-gray-400 line-through mr-4">R$ 497,00</span>
-                <span className="text-green-400">R$ 147,00</span>
+                <span className="text-green-400">R$ 47,00</span>
               </p>
               <p className="text-sm text-gray-400">
                 Pagamento único - Acesso vitalício
