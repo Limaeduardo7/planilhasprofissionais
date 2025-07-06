@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const FloatingWhatsApp = () => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [isPulsing, setIsPulsing] = useState(false);
-  const phoneNumber = '+5554996258695';
+  const phoneNumber = '+555491397178';
   const message = 'Tenho dúvidas sobre o Fluxo de Caixa 4.0.';
   
   // Efeito de pulsação a cada 3 segundos
